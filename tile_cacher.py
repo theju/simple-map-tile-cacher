@@ -47,7 +47,7 @@ def index(xx=None, yy=None, zz=None, ext=None):
     except FileNotFoundError:
         frag = random.choice(subdomains)
         loop.run_in_executor(None, download_tile, frag, tiles_path)
-        redirect(tiles_url.format(frag) + "/" + tiles_path)
+        redirect(tiles_url.format(frag) + tiles_path)
 
 
 if __name__ == '__main__':
