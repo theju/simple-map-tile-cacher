@@ -58,9 +58,8 @@ if __name__ == '__main__':
         loop.close()
     if config:
         try:
-            run_func = functools.partial(
-                run, server="gunicorn",
-                host=config["host"], port=config["port"])
+            server_kwargs = config["server"]
+            run_func = functools.partial(run, **server_kwargs)
             fut = loop.create_task(run_func(app))
             loop.run_until_complete(fut)
         except KeyboardInterrupt:

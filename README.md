@@ -23,12 +23,15 @@ $ python tile_cacher.py
 ## Configuration
 
 A `config.json` file is searched for within the current directory. The file
-looks like below
+may look like below
 
 ```json
 {
-    "host": "127.0.0.1",
-    "port": 8000,
+    "server": {
+        "server": "gunicorn",
+        "host": "localhost",
+        "port": 8001
+    },
     "tiles": {
         "url": "https://{0}.tile.openstreetmap.org/",
         "subdomains": ["a", "b", "c", "d"],
@@ -37,7 +40,8 @@ looks like below
     "max_age": 3600
 }
 ```
-The `host` is the hostname and the `port` where this server should run.
+The `server` object is the keywords that are passed to the bottle.py's
+(run)[http://bottlepy.org/docs/dev/api.html#bottle.run] function.
 The `tiles` object contains the `url` of the tiles (could be OSM, Mapbox etc).
 The `tiles` object also contains a `subdomains` attribute which holds all value
 of all subdomains of the tiles server. The `output_path` is where all the tiles
