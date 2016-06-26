@@ -11,10 +11,14 @@ from bottle import Bottle, route, run, response, redirect
 
 app = Bottle()
 loop = asyncio.get_event_loop()
+_in_download = {}
 config = None
 
 
 def download_tile(frag, path):
+    if _in_download.get(path):
+        return None
+    _in_download[path] = 1
     output_path = os.path.join(config["tiles"]["output_path"], path)
     response = requests.get(config["tiles"]["url"].format(frag) + path)
     try:
@@ -24,6 +28,7 @@ def download_tile(frag, path):
     ff = open(output_path, "wb")
     ff.write(response.content)
     ff.close()
+    _in_download.pop(path, None)
     return response
 
 
