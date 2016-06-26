@@ -28,13 +28,13 @@ may look like below
 ```json
 {
     "server": {
-        "server": "gunicorn",
+        "server": "wsgiref",
         "host": "localhost",
         "port": 8001
     },
     "tiles": {
         "url": "https://{0}.tile.openstreetmap.org/",
-        "subdomains": ["a", "b", "c", "d"],
+        "subdomains": ["a", "b", "c"],
         "output_path": "/home/ubuntu/tiles"
     },
     "max_age": 3600
